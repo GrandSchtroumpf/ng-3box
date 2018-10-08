@@ -31,7 +31,9 @@ export class ThreeBox {
    */
   public openBox(address?: string, options?: BoxOptions): Promise<Threebox> {
     if (!this.web3.currentProvider) { throw new Error('No web3 provider available'); }
-    return ThreeboxFactory.openbox(
+    if (!address && !this.web3.eth.defaultAccount) { throw new Error('Please provide an address'); }
+    if (address && !this.web3.utils.isAddress(address)) { throw new Error(`This is not a valid address: ${address}`); }
+    return ThreeboxFactory.openBox(
       address || this.web3.eth.defaultAccount,
       this.web3.currentProvider,
       options

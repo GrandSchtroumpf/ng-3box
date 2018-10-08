@@ -6,7 +6,7 @@ export interface Threebox {
   /**
    * Access the private store of the users threeBox
    */
-  privet: KeyValueStore;
+  private: KeyValueStore;
   /**
    * Closes the 3box instance without clearing the local cache.
    * Should be called after you are done using the 3Box instance, but without logging the user out.
