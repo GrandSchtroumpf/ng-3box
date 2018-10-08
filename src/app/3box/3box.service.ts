@@ -1,13 +1,27 @@
 import { Inject, Injectable } from '@angular/core';
 import { WEB3 } from '../web3';
-import Web3 from 'web3';
 import { BoxOptions, GetProfileOptions, Threebox } from './3box';
+import Web3 from 'web3';
 import * as ThreeboxFactory from '3box';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ThreeBox {
 
+  private _box = new BehaviorSubject<Threebox>(null);
+  public box$ = this._box.asObservable();
+
   constructor(@Inject(WEB3) private web3: Web3) {}
+
+  /** Get a snapshot of the current box opened */
+  public get box(): Threebox {
+    return this._box.getValue();
+  }
+
+  /** Set the current box opened and alert components that subscribed to box$ */
+  public set box(box: Threebox) {
+    this._box.next(box);
+  }
 
   /**
    * Opens the user space associated with the given address.
@@ -15,9 +29,16 @@ export class ThreeBox {
    * @param options Optional parameters.
    * @returns The threeBox instance for the given address.
    */
-  public openBox(address: string, options?: BoxOptions): Promise<Threebox> {
+  public openBox(address?: string, options?: BoxOptions): Promise<Threebox> {
     if (!this.web3.currentProvider) { throw new Error('No web3 provider available'); }
-    return ThreeboxFactory.openbox(address, this.web3.currentProvider, options) as Promise<Threebox>;
+    return ThreeboxFactory.openbox(
+      address || this.web3.eth.defaultAccount,
+      this.web3.currentProvider,
+      options
+    ).then(box => {
+      this.box = box;
+      return box;
+    });
   }
 
   /**

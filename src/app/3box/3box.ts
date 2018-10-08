@@ -48,13 +48,19 @@ export interface KeyValueStore {
 }
 
 export interface BoxOptions {
+  /** A ipfs options object to pass to the js-ipfs constructor. */
   ipfsOptions: Object;
+  /** A custom path for orbitdb storage. */
   orbitPath: string;
+  /** A function that will be called when the user has consented to opening the box. */
   consentCallback: Function;
 }
 
 export interface GetProfileOptions {
+  /** A ipfs options object to pass to the js-ipfs constructor. */
   ipfsOptions: Object;
+  /** A custom path for orbitdb storage. */
   orbitPath: string;
+  /** The address of the server to call. */
   addressServer: string;
 }
