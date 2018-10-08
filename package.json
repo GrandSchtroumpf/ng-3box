@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "3box": "^1.0.0-beta-7",
     "@angular/animations": "^6.1.0",
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
@@ -20,11 +21,15 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "async": "^2.6.1",
     "core-js": "^2.5.4",
     "rxjs": "~6.2.0",
+    "web3": "^1.0.0-beta.36",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^2.5.3",
+    "@angular-builders/dev-server": "^2.3.5",
     "@angular-devkit/build-angular": "~0.8.0",
     "@angular/cli": "~6.2.3",
     "@angular/compiler-cli": "^6.1.0",
