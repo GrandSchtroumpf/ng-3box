@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ThreeBox } from './3box/3box.service';
 
 
@@ -6,13 +6,9 @@ import { ThreeBox } from './3box/3box.service';
   selector: 'app-root',
   template: '<p>3Box and Angular</p>'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   constructor(private threebox: ThreeBox) {}
-
-  ngOnInit() {
-
-  }
 
   /**
    * Open a box then add it to the list of opened boxes
